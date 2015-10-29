@@ -1,0 +1,9 @@
+<class_libraries>
+  <library path="lib/libdensity_filter">
+    <class name="density_filter/DensityFilter" type="density_filter::DensityFilter" base_class_type="filters::FilterBase<sensor_msgs::LaserScan>">
+      <description>
+        This is a filter which increases the angle increment of a scan, increasing the density of measurements.
+      </description>
+    </class>
+  </library>
+</class>

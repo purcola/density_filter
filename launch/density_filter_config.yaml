@@ -1,0 +1,5 @@
+scan_filter_chain:
+- name: density
+  type: DensityFilter
+  params:
+    angle_increment: 0.001 #0.0087266 
