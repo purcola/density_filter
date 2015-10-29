@@ -31,6 +31,21 @@ double range_at(double angle, const sensor_msgs::LaserScan& msg)
     return m * angle + n;
 }
 
+double intensity_at(double angle, const sensor_msgs::LaserScan& msg)
+{
+    int index = std::floor((angle - msg.angle_min)/msg.angle_increment);
+
+    if (index < 0 or index >= msg.ranges.size() - 1)
+        return 0;
+
+    if (msg.ranges[index] < msg.range_min or msg.ranges[index + 1] < msg.range_min or msg.ranges[index] > msg.range_max or msg.ranges[index + 1] > msg.range_max)
+        return 0;
+
+    double m = (msg.intensities[index + 1] - msg.intensities[index])/msg.angle_increment;
+    double n = msg.intensities[index]  - m * (msg.angle_min + index*msg.angle_increment);
+    return m * angle + n;
+}
+
 
 bool density_filter::DensityFilter::update(const sensor_msgs::LaserScan& data_in, sensor_msgs::LaserScan& data_out)
 {
